@@ -13,9 +13,9 @@ Member 1
 >
 
 Member 2
-> Name -
+> Name -Florentino Becerra
 >
-> Email -
+> Email - becerra_f@csu.fullerton.edu
 >
 
 Member 3

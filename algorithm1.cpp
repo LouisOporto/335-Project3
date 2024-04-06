@@ -37,9 +37,9 @@ int soccer_exhaustive(int F[], int row, int col) {
   int maxIteration = row + col - 2; // Total number of different paths orginating at (0,0) and ending at (r-1,c-1)
   int counter = 0; // Number of valid paths in F
 
-  for(int i = 0; i < 2^maxIteration - 1; i++) {
+  for(int i = 0; i < (2^maxIteration - 1); i++) {
     std::string candidate;
-    for(int j = 0; j < maxIteration - 1; j++) {
+    for(int j = 0; j < (maxIteration - 1); j++) {
       //TODO - need to adjust bit to check current location or return 1
       /* bit = (bits >> k) & 1; */
       int bit = 0;

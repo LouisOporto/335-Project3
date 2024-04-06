@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 
 // Exhaustive Search
 /* 
@@ -20,7 +19,7 @@ soccer_exhaustive(G):
  */
 
 int soccer_exhaustive(int F[], int row, int col);
-bool verified(std::vector<int> candidiate);
+bool verified(std::string candidiate);
 
 int main() {
 
@@ -39,15 +38,16 @@ int soccer_exhaustive(int F[], int row, int col) {
   int counter = 0; // Number of valid paths in F
 
   for(int i = 0; i < 2^maxIteration - 1; i++) {
-    std::vector<int> candidate;
+    std::string candidate;
     for(int j = 0; j < maxIteration - 1; j++) {
       //TODO - need to adjust bit to check current location or return 1
       /* bit = (bits >> k) & 1; */
+      int bit = 0;
       if (bit == 1) {
-        candidate.push_back(1); // 1 for right
+        candidate.push_back('1'); // 1 for right
       }
       else {
-        candidate.push_back(0); // 0 for down
+        candidate.push_back('0'); // 0 for down
       }
     }
     if (verified(candidate)) {
@@ -58,7 +58,7 @@ int soccer_exhaustive(int F[], int row, int col) {
   return counter;
 }
 
-bool verified(std::vector<int> candidate) {
+bool verified(std::string candidate) {
   //TODO check if candidate stays in the grid, never cross an X cell, and ends at (r - 1)(c - 1)
   return true; // If all conditions apply
 }

@@ -24,19 +24,26 @@ soccer_dyn_prop(F):
         left = A[i][j - 1]
       A[i][j] += above + left
   return A[r - 1][c - 1]
-  {{'.','.','.','.','.','.','X','.','X'},
-  {'X','.','.','.','.','.','.','.','.'},
-  {'.','.','.','X','.','.','.','X','.'},
-  {'.','.','.','.','.','.','X','.','X'},
-  {'.','.','.','.','.','.','X','.','X'},};
 */
+
+int* soccer_dyn_prop(char[][10]){
+  static int result[LEN][WID];
+
+};
+
+const int LEN = 8;
+const int WID = 9;
 
 int main() {
   
-  char field[8][10] = {"......X.X","X........",
+  char field[][10] = {"......X.X","X........",
   "...X...X.","..X....X.",
   ".X....X..","....X....",
   "..X.....X","........."};
+
+  int* result = soccer_dyn_prop(field);
+
+  
 
   return 0;
 }

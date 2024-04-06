@@ -18,22 +18,25 @@ soccer_exhaustive(G):
   return counter
  */
 
-int soccer_exhaustive(int F[], int row, int col);
+// Need to fix input matrix, not sure this is right !!
+int soccer_exhaustive(int F[][3], int row, int col);
 bool verified(std::string candidiate);
 
 int main() {
 
   // Sample Code for algorithm input (change later to be user inputted or what is required)
-  int F[] = {1, 2, 3};
+  int F[3][3] = {{0,0,0},
+             {0,0,0},
+             {0,0,0}};
   int row = 3;
-  int col = 1;
+  int col = 3;
 
   int result = soccer_exhaustive(F, row, col);
   std::cout << "There are " << result << " possible pathways to get to the goal" << '\n';
   return 0;
 }
 
-int soccer_exhaustive(int F[], int row, int col) {
+int soccer_exhaustive(int F[][3], int row, int col) {
   int maxIteration = row + col - 2; // Total number of different paths orginating at (0,0) and ending at (r-1,c-1)
   int counter = 0; // Number of valid paths in F
 
@@ -54,7 +57,6 @@ int soccer_exhaustive(int F[], int row, int col) {
       counter++;
     }
   }
-
   return counter;
 }
 

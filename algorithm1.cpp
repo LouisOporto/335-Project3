@@ -19,7 +19,7 @@ soccer_exhaustive(G):
  */
 
 // Need to fix input matrix, not sure this is right !!
-int soccer_exhaustive(int F[][3], int row, int col);
+int soccor_exhaustive(vector<char>& grid, int rows, int cols);
 bool verified(std::string candidiate);
 
 int main() {
@@ -36,31 +36,37 @@ int main() {
   return 0;
 }
 
-int soccer_exhaustive(int F[][3], int row, int col) {
-  int maxIteration = row + col - 2; // Total number of different paths orginating at (0,0) and ending at (r-1,c-1)
-  int counter = 0; // Number of valid paths in F
+int soccor_exhaustive(vector<char>& grid, int rows, int cols)
+{
+    int n = rows + cols - 2;
+    int counter = 0;
 
-  for(int i = 0; i < (2^maxIteration - 1); i++) {
-    std::string candidate;
-    for(int j = 0; j < (maxIteration - 1); j++) {
-      //TODO - need to adjust bit to check current location or return 1
-      /* bit = (bits >> k) & 1; */
-      int bit = 0;
-      if (bit == 1) {
-        candidate.push_back('1'); // 1 for right
-      }
-      else {
-        candidate.push_back('0'); // 0 for down
-      }
-    }
-    if (verified(candidate)) {
-      counter++;
-    }
-  }
-  return counter;
-}
+    // Create a path vector to track visited cells
+    vector<char> path(rows * cols, '.');
 
-bool verified(std::string candidate) {
-  //TODO check if candidate stays in the grid, never cross an X cell, and ends at (r - 1)(c - 1)
-  return true; // If all conditions apply
+    // Loop through all possible binary sequences (0 to 2^n - 1)
+    for (int bits = 0; bits < (1 << n); ++bits)
+    {
+        // Build the path based on the binary sequence
+        vector<char> candidatePath;
+        for (int k = 0; k < n; ++k)
+        {
+            if ((bits >> k) & 1)
+            {
+                candidatePath.push_back('→');
+            }
+            else
+            {
+                candidatePath.push_back('↓');
+            }
+        }
+
+        // Check if the path is valid (within grid, avoids opponents, reaches goal)
+        if (isValidPath(grid, rows, cols, 0, 0, path))
+        {
+            counter++;
+        }
+    }
+
+    return counter;
 }

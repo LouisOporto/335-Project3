@@ -19,9 +19,9 @@ Member 2
 >
 
 Member 3
-> Name - 
+> Name - Haron Taher
 >
-> Email -
+> Email - htaher1@csu.fullerton.edu
 >
 
 Member 4

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+using namespace std;
 
 // Exhaustive Search
 /* 
@@ -19,24 +21,31 @@ soccer_exhaustive(G):
  */
 
 // Need to fix input matrix, not sure this is right !!
-int soccor_exhaustive(vector<char>& grid, int rows, int cols);
+int soccer_exhaustive(vector<char>& grid, int rows, int cols);
 bool verified(std::string candidiate);
 
 int main() {
+    // Grid declaration and definition
+    vector<vector<char>> grid = {
+{'.', '.', '.', '.', '.', '.', 'X', '.', 'X'},
+    {'X', '.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', 'X', '.', '.', '.', 'X', '.'},
+    {'.', '.', 'X', '.', '.', '.', '.', 'X', '.'},
+    {'.', 'X', '.', '.', '.', '.', 'X', '.', '.'},
+    {'.', '.', '.', '.', 'X', '.', '.', '.', '.'},
+    {'.', '.', 'X', '.', '.', '.', '.', '.', 'X'},
+    {'.', '.', '.', '.', '.', '.', '.', '.', '.'}
+    };
 
-  // Sample Code for algorithm input (change later to be user inputted or what is required)
-  int F[3][3] = {{0,0,0},
-             {0,0,0},
-             {0,0,0}};
-  int row = 3;
-  int col = 3;
+  int row = 8;
+  int col = 9;
 
-  int result = soccer_exhaustive(F, row, col);
-  std::cout << "There are " << result << " possible pathways to get to the goal" << '\n';
+  int result = soccer_exhaustive(grid, row, col);
+  cout << "There are " << result << " possible pathways to get to the goal" << '\n';
   return 0;
 }
 
-int soccor_exhaustive(vector<char>& grid, int rows, int cols)
+int soccer_exhaustive(vector<char>& grid, int rows, int cols)
 {
     int n = rows + cols - 2;
     int counter = 0;

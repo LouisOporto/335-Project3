@@ -29,21 +29,22 @@ soccer_dyn_prop(F):
 const int LEN = 8;
 const int WID = 9;
 
-int* soccer_dyn_prop(char[][10]);
+int soccer_dyn_prop(char[][10]);
 
 int main() {
   
+  int result;
   char field[][10] = {"......X.X","X........",
   "...X...X.","..X....X.",
   ".X....X..","....X....",
   "..X.....X","........."};
 
-  int* result = soccer_dyn_prop(field);
+  result = soccer_dyn_prop(field);
 
   return 0;
 }
 
-int* soccer_dyn_prop(char field[][10]){
+int soccer_dyn_prop(char field[][10]){
   static int result[LEN][WID];
   int above, left;
   if(field[0][0] == 'X')
@@ -63,6 +64,8 @@ int* soccer_dyn_prop(char field[][10]){
         above = result[i-1][j];
       if(j > 0 && field[i][j-1] == '.')
         left = result[i][j-1];
+      result[i][j] += (above + left);
     }
   }
+  return result[LEN - 1][WID - 1];
 }

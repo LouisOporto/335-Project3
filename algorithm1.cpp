@@ -20,9 +20,9 @@ soccer_exhaustive(G):
   return counter
  */
 
-// Need to fix input matrix, not sure this is right !!
-int soccer_exhaustive(vector<vector<char>> &grid, int row, int col);
-bool isValidPath(std::string candidate, vector<vector<char>> &grid, int row, int col);
+// Function prototypes
+int soccer_exhaustive(vector<char>& grid, int rows, int cols);
+bool isValidPath(string candidatePath, vector<vector<char>> &grid, int row, int col);
 
 int main() {
     // Grid declaration and definition
@@ -54,6 +54,7 @@ int main() {
   return 0;
 }
 
+
 int soccer_exhaustive(vector<vector<char>> &grid, int row, int col)
 {
     int n = row + col - 2;
@@ -77,7 +78,7 @@ int soccer_exhaustive(vector<vector<char>> &grid, int row, int col)
         }
 
         // Check if the path is valid (within grid, avoids opponents, reaches goal)
-        if (isValidPath(candidatePath, grid, row, col))
+        if (isValidPath(grid, rows, cols, 0, 0, path))
         {
             // Read candidatePath incrementally ie(1 char, 2 char, 3 char, ... ,n chars)
             // Based on the number of 1s and 0s check that indexed location on the grid. If there is an X return false
@@ -110,6 +111,5 @@ bool isValidPath(string candidatePath, vector<vector<char>> &grid, int row, int 
         // Check if an X is in bounds
         if(grid[zeros][ones] == 'X') return false;
     }
-
     return true;
 }

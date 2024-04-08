@@ -21,7 +21,7 @@ soccer_exhaustive(G):
  */
 
 // Function prototypes
-int soccer_exhaustive(vector<char>& grid, int rows, int cols);
+int soccer_exhaustive(vector<vector<char>>& grid, int rows, int cols);
 bool isValidPath(string candidatePath, vector<vector<char>> &grid, int row, int col);
 
 int main() {
@@ -78,7 +78,7 @@ int soccer_exhaustive(vector<vector<char>> &grid, int row, int col)
         }
 
         // Check if the path is valid (within grid, avoids opponents, reaches goal)
-        if (isValidPath(grid, rows, cols, 0, 0, path))
+        if (isValidPath(candidatePath, grid, row, col))
         {
             // Read candidatePath incrementally ie(1 char, 2 char, 3 char, ... ,n chars)
             // Based on the number of 1s and 0s check that indexed location on the grid. If there is an X return false

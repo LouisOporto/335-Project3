@@ -20,9 +20,9 @@ soccer_exhaustive(G):
   return counter
  */
 
-// Need to fix input matrix, not sure this is right !!
-int soccer_exhaustive(vector<vector<char>> &grid, int row, int col);
-bool isValidPath(std::string candidate, vector<vector<char>> &grid, int row, int col);
+// Function prototypes
+int soccer_exhaustive(vector<char>& grid, int rows, int cols);
+bool verified(vector<char>& grid, int rows, int cols, int i, int j, vector<char>& path);
 
 int main() {
     // Grid declaration and definition
@@ -44,6 +44,7 @@ int main() {
   cout << "There are " << result << " possible pathways to get to the goal" << '\n';
   return 0;
 }
+
 
 int soccer_exhaustive(vector<vector<char>> &grid, int row, int col)
 {
@@ -71,15 +72,45 @@ int soccer_exhaustive(vector<vector<char>> &grid, int row, int col)
         }
 
         // Check if the path is valid (within grid, avoids opponents, reaches goal)
-        if (isValidPath(candidatePath, grid, row, col))
+<<<<<<< HEAD
+        if (verified(grid, rows, cols, 0, 0, path))
         {
             counter++;
         }
     }
+
     return counter;
 }
 
-bool isValidPath(string candidatePath, vector<vector<char>> &grid, int row, int col) {
 
-  return true;
+bool verified(vector<char>& grid, int rows, int cols, int i, int j, vector<char>& path)
+{
+  // Check if within grid boundaries
+  if (i < 0 || i >= rows || j < 0 || j >= cols)
+    {
+        return false;
+    }
+
+    // Check if opponent cell or already visited
+    if (grid[i * cols + j] == 'X' || path[i * cols + j] == 'V')
+    {
+        return false;
+    }
+
+    // Mark cell as visited
+  path[i * cols + j] = 'V';
+
+    // Check if reached goal
+    if (i == rows - 1 && j == cols - 1) {
+        return true;
+  }
+
+    // Recursively explore right and down paths
+    bool rightValid = verified(grid, rows, cols, i, j + 1, path);
+    bool downValid = verified(grid, rows, cols, i + 1, j, path);
+
+    // Unmark cell after exploration
+    path[i * cols + j] = '.';
+
+    return rightValid || downValid;
 }

@@ -68,17 +68,7 @@ int soccer_dyn_prop(char field[][10]){
       if(j > 0 && field[i][j-1] == '.')
         left = result[i][j-1];
       result[i][j] += (above + left);
-      cout << result[i][j] << " ";
     }
-    cout << endl;
   }
-  /*
-  for (int i = 0; i < LEN; i++) { 
-        for (int j = 0; j < WID; j++) { 
-            cout << result[i][j] << " "; 
-        } 
-        cout << endl; 
-    }
-    */
   return result[LEN - 1][WID - 1];
 }

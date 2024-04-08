@@ -25,7 +25,7 @@ Member 3
 >
 
 Member 4
-> Name -
+> Name - John Michael Lott
 >
-> Email - 
+> Email - jlott1004@csu.fullerton.edu
 >

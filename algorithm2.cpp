@@ -47,7 +47,7 @@ int main() {
 }
 
 int soccer_dyn_prop(char field[][10]){
-  static int result[LEN][WID];
+  int result[LEN][WID];
   int above, left;
   if(field[0][0] == 'X')
     return 0;

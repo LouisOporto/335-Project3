@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <time.h>
 using namespace std;
 
 // Exhaustive Search
@@ -35,34 +36,50 @@ int main() {
     */
 
     vector<vector<char>> grid = {
-    {'.', '.', '.', '.', '.', '.', 'X', '.', 'X'},
-    {'X', '.', '.', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', 'X', '.', '.', '.', 'X', '.'},
-    {'.', '.', 'X', '.', '.', '.', '.', 'X', '.'},
-    {'.', 'X', '.', '.', '.', '.', 'X', '.', '.'},
-    {'.', '.', '.', '.', 'X', '.', '.', '.', '.'},
-    {'.', '.', 'X', '.', '.', '.', '.', '.', 'X'},
-    {'.', '.', '.', '.', '.', '.', '.', '.', '.'}
+    {'.', '.', '.', '.', '.', '.', 'X', '.', 'X', '.', '.', '.', '.', '.', 'X', '.'},
+    {'X', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', 'X', '.', '.', '.', 'X', '.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', 'X', '.', '.', '.', '.', 'X', '.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', 'X', '.', '.', '.', '.', 'X', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', 'X', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', 'X', '.', '.', '.', '.', '.', 'X', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'}
     };
 
 
-  int row = grid.size();
-  int col = grid[0].size();
+    int row = grid.size();
+    int col = grid[0].size();
 
-  int result = soccer_exhaustive(grid, row, col);
-  cout << "There are " << result << " possible pathways to get to the goal" << '\n';
-  return 0;
+    clock_t t;
+    t = clock();
+    int result = soccer_exhaustive(grid, row, col);
+    t = clock() - t;
+
+    cout << "There are " << result << " possible pathways to get to the goal" << '\n';
+    std::cout << "It took " << int(t) << " clicks (" << (float)t/CLOCKS_PER_SEC << " seconds)." << '\n';
+    return 0;
 }
 
 
 int soccer_exhaustive(vector<vector<char>> &grid, int row, int col)
 {
     int n = row + col - 2;
+    long long int iterations = (1 << 30);
     int counter = 0;
-
+    cout << "row: " << row << '\n' << "col:" << col << '\n';
+    cout << iterations << '\n';
     // Loop through all possible binary sequences (0 to 2^n - 1)
     for (int bits = 0; bits < (1 << n); bits++)
     {
+        // cout << bits << '\n';
         // Build the path based on the binary sequence
         string candidatePath = "";
         for (int k = 0; k < n; k++)
@@ -76,7 +93,7 @@ int soccer_exhaustive(vector<vector<char>> &grid, int row, int col)
                 candidatePath.push_back('0'); // 0 represents down
             }
         }
-
+        // cout << candidatePath << '\n';
         // Check if the path is valid (within grid, avoids opponents, reaches goal)
         if (isValidPath(candidatePath, grid, row, col))
         {

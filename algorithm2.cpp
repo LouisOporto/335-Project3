@@ -1,8 +1,15 @@
 #include <iostream>
-
+#include <time.h>
 using namespace std;
 
-//Dynamic Programming
+/* Names:
+    Louis Oporto
+    Florentino Becerra
+    Haron Taher
+    John Michael Lott
+*/
+
+//Dynamic Programming Psuedocode
 /* 
 soccer_dyn_prop(F):
   //corner case: inital cell is impassible
@@ -39,9 +46,12 @@ int main() {
   ".X....X..","....X....",
   "..X.....X","........."};
 
+  clock_t t;
+  t = clock();
   result = soccer_dyn_prop(field);
-
+  t = clock() - t;
   cout << "The result is " << result << endl;
+  std::cout << "It took " << int(t) << " clicks (" << (float)t/CLOCKS_PER_SEC << " seconds)." << '\n';
 
   return 0;
 }

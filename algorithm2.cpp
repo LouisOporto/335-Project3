@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <time.h>
 using namespace std;
 
@@ -36,12 +37,12 @@ soccer_dyn_prop(F):
 const int LEN = 8;
 const int WID = 9;
 
-int soccer_dyn_prop(char[][10]);
+int soccer_dyn_prop(string[]);
 
 int main() {
   
   int result;
-  char field[][10] = {"......X.X","X........",
+  string field[] = {"......X.X","X........",
   "...X...X.","..X....X.",
   ".X....X..","....X....",
   "..X.....X","........."};
@@ -56,7 +57,7 @@ int main() {
   return 0;
 }
 
-int soccer_dyn_prop(char field[][10]){
+int soccer_dyn_prop(string field[]){
   int result[LEN][WID];
   int above, left;
   if(field[0][0] == 'X')

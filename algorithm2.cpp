@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <time.h>
+#include <chrono>
 using namespace std;
 
 /* Names:
@@ -48,11 +48,13 @@ int main() {
   "..X.....X","........."};
 
   clock_t t;
-  t = clock();
+  auto start = chrono::steady_clock::now();
   result = soccer_dyn_prop(field);
-  t = clock() - t;
+  auto end = chrono::steady_clock::now();
+  const chrono::duration<double> elapsed{end - start};
+
   cout << "The result is " << result << endl;
-  std::cout << "It took " << int(t) << " clicks (" << (float)t/CLOCKS_PER_SEC << " seconds)." << '\n';
+  cout << "It took " << elapsed << "seconds." << '\n';
 
   return 0;
 }

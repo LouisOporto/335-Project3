@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <time.h>
+#include <chrono>
 using namespace std;
 
 /* Names:
@@ -77,12 +77,13 @@ int main() {
     int col = grid[0].size();
 
     clock_t t;
-    t = clock();
+    auto start = chrono::steady_clock::now();
     int result = soccer_exhaustive(grid, row, col);
-    t = clock() - t;
+    auto end = chrono::steady_clock::now();
+    const chrono::duration<double> elapsed{end - start};
 
     cout << "There are " << result << " possible pathways to get to the goal" << '\n';
-    std::cout << "It took " << int(t) << " clicks (" << (float)t/CLOCKS_PER_SEC << " seconds)." << '\n';
+    cout << "It took " << elapsed << "seconds." << '\n';
     return 0;
 }
 

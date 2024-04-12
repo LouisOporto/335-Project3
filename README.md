@@ -2,7 +2,7 @@
 
 Assignment - Project 3
 
-[Github Link](http://www.youtube.com) 
+[Github Link](https://github.com/LouisOporto/335-Project3) 
 
 
 ## Members
@@ -29,3 +29,15 @@ Member 4
 >
 > Email - jlott1004@csu.fullerton.edu
 >
+
+
+# Run Code
+## Algorithm 1
+Compile g++ -std=c++20 -o alogrithm1 algorithm1.cpp
+Run ./algorithm1
+
+## Algorithm 2
+Compile g++ -std=c++20 -o algorithm2 algorithm2.cpp
+Run ./algorithm2
+
+

@@ -83,7 +83,7 @@ int main() {
     const chrono::duration<double> elapsed{end - start};
 
     cout << "There are " << result << " possible pathways to get to the goal" << '\n';
-    cout << "It took " << elapsed << "seconds." << '\n';
+    cout << "It took " << elapsed << "." << '\n';
     return 0;
 }
 
@@ -91,10 +91,7 @@ int main() {
 int soccer_exhaustive(vector<vector<char>> &grid, int row, int col)
 {
     int n = row + col - 2;
-    long long int iterations = (1 << 30);
     int counter = 0;
-    cout << "row: " << row << '\n' << "col:" << col << '\n';
-    cout << iterations << '\n';
     // Loop through all possible binary sequences (0 to 2^n - 1)
     for (int bits = 0; bits < (1 << n); bits++)
     {

@@ -53,8 +53,8 @@ int main() {
   auto end = chrono::steady_clock::now();
   const chrono::duration<double> elapsed{end - start};
 
-  cout << "The result is " << result << endl;
-  cout << "It took " << elapsed << "seconds." << '\n';
+  cout << "There are " << result << " possible pathways to get to the goal." << '\n';
+  cout << "It took " << elapsed << "." << '\n';
 
   return 0;
 }

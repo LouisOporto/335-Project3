@@ -14,11 +14,13 @@ string firstgrid[] = {"..",
 vector<vector<char>> secondgrid = {
     {'.', '.', 'X', '.'},
     {'X', '.', '.', 'X'},
+    {'.', 'X', '.', '.'},
     {'.', '.', '.', '.'}
 };
 
 string secondgrid[] = {"..X.",
                        "X..X",
+                       ".X..",
                        "...."};
 
 

@@ -6,7 +6,6 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
-#include <chrono>
 using namespace std;
 
 // Function prototypes

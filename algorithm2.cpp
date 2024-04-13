@@ -23,6 +23,7 @@ int main()
     {'.', '.', '.', '.', '.', '.', '.', '.', '.'}
     };
 
+  clock_t t;
   auto start = chrono::steady_clock::now();
   int result = soccer_dyn_prog(F_example);
   auto end = chrono::steady_clock::now();

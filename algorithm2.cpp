@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <time.h>
 #include <chrono>
 using namespace std;
 
@@ -37,17 +39,41 @@ soccer_dyn_prop(F):
 const int LEN = 8;
 const int WID = 9;
 
-int soccer_dyn_prop(string[]);
+int soccer_dyn_prop(char[][WID]);
 
 int main() {
   
   int result;
-  string field[] = {"......X.X","X........",
+  char field[LEN][WID];
+  /*
+  = {"......X.X","X........",
   "...X...X.","..X....X.",
   ".X....X..","....X....",
   "..X.....X","........."};
+  */
 
-  clock_t t;
+  srand(time(0));
+
+  int position, defCount = 0;
+  cout << "Field is" << LEN << " by " << WID <<":\n";
+  for(int i = 0;i < LEN;i++){
+    for(int j = 0;j< WID;j++){
+    if(defCount < 2 || ((i+j) != 0))
+      position = rand() % 2;
+    else
+      position = 0;
+    if(position == 0)
+      field[i][j] = '.';
+    else
+      field[i][j] = 'X';
+      defCount++;
+    cout << field[i][j];
+    }
+    defCount = 0;
+    //cout << "row " << i << ": " << field[i] << " to here"<< endl;
+  }
+
+  //clock_t t;
   auto start = chrono::steady_clock::now();
   result = soccer_dyn_prop(field);
   auto end = chrono::steady_clock::now();
@@ -59,7 +85,7 @@ int main() {
   return 0;
 }
 
-int soccer_dyn_prop(string field[]){
+int soccer_dyn_prop(char field[][WID]){
   int result[LEN][WID];
   int above, left;
   if(field[0][0] == 'X')

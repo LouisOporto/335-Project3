@@ -15,30 +15,124 @@ bool isValidPath(string candidatePath, vector<vector<char>> &grid, int row, int 
 int main()
 {
     // Grid declaration and definition
+    vector<vector<char>> grid;
+    int choice = 0;
+    bool vaild = false;
+    while (!vaild)
+    {
 
-    vector<vector<char>> grid = {
-    {'.', '.', '.', '.', '.', '.', 'X', '.', 'X'},
-    {'X', '.', '.', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', 'X', '.', '.', '.', 'X', '.'},
-    {'.', '.', 'X', '.', '.', '.', '.', 'X', '.'},
-    {'.', 'X', '.', '.', '.', '.', 'X', '.', '.'},
-    {'.', '.', '.', '.', 'X', '.', '.', '.', '.'},
-    {'.', '.', 'X', '.', '.', '.', '.', '.', 'X'},
-    {'.', '.', '.', '.', '.', '.', '.', '.', '.'}
-    };
+        cout << "\n1.2x2\n"
+                "2.4x4\n"
+                "3.8x8\n"
+                "4.12x12\n"
+                "5.16x16\n"
+                "Which size grid would you like to test? ";
 
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            grid = {
+                {'.', '.'},
+                {'X', '.'}};
+            vaild = true;
+            break;
 
-    int row = grid.size();
-    int col = grid[0].size();
+        case 2:
+            grid = {
+                {'.', '.', 'X', '.'},
+                {'X', '.', '.', 'X'},
+                {'.', 'X', '.', '.'},
+                {'.', '.', '.', '.'}};
+            vaild = true;
+            break;
 
-    clock_t t;
-    auto start = chrono::steady_clock::now();
-    int result = soccer_exhaustive(grid, row, col);
-    auto end = chrono::steady_clock::now();
-    const chrono::duration<double> elapsed{end - start};
+        case 3:
+            grid = {
+                {'.', '.', '.', '.', '.', '.', 'X', '.'},
+                {'X', '.', '.', '.', '.', '.', '.', '.'},
+                {'.', '.', '.', 'X', '.', '.', '.', 'X'},
+                {'.', '.', 'X', '.', '.', '.', '.', 'X'},
+                {'.', 'X', '.', '.', '.', '.', 'X', '.'},
+                {'.', '.', 'X', '.', '.', '.', '.', '.'},
+                {'.', '.', '.', '.', 'X', '.', '.', '.'},
+                {'.', '.', '.', '.', '.', '.', '.', '.'}};
+            vaild = true;
+            break;
 
-    cout << "There are " << result << " possible pathways to get to the goal" << '\n';
-    cout << "It took " << chrono::duration_cast<chrono::seconds>(elapsed).count() << " seconds." << '\n';
+        case 4:
+            grid = {
+                {'.', '.', '.', '.', '.', '.', 'X', '.', '.', '.', 'X', '.'},
+                {'X', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+                {'.', '.', '.', 'X', '.', '.', '.', 'X', '.', '.', 'X', '.'},
+                {'.', '.', 'X', '.', '.', '.', '.', 'X', '.', '.', '.', '.'},
+                {'.', 'X', '.', '.', '.', '.', 'X', '.', '.', '.', 'X', '.'},
+                {'.', '.', 'X', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+                {'.', '.', '.', '.', 'X', '.', '.', 'X', '.', '.', '.', '.'},
+                {'.', '.', '.', '.', '.', '.', '.', '.', '.', 'X', '.', '.'},
+                {'.', 'X', '.', '.', '.', 'X', '.', '.', '.', '.', '.', '.'},
+                {'.', 'X', 'X', 'X', '.', '.', '.', 'X', '.', '.', 'X', '.'},
+                {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+                {'X', '.', '.', 'X', '.', '.', '.', '.', 'X', '.', '.', '.'},
+            };
+            vaild = true;
+            break;
+
+        case 5:
+            grid = {
+                {'.', '.', '.', '.', '.', '.', 'X', '.', '.', '.', 'X', '.', '.', 'X', '.', 'X'},
+                {'X', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+                {'.', '.', '.', 'X', '.', '.', '.', 'X', '.', '.', 'X', '.', '.', '.', '.', '.'},
+                {'.', '.', 'X', '.', '.', '.', '.', 'X', '.', '.', '.', '.', '.', 'X', '.', '.'},
+                {'.', 'X', '.', '.', '.', '.', 'X', '.', '.', '.', 'X', '.', '.', '.', '.', '.'},
+                {'.', '.', 'X', '.', '.', '.', '.', '.', '.', '.', '.', 'X', '.', '.', 'X', '.'},
+                {'.', '.', '.', '.', 'X', '.', '.', 'X', '.', '.', '.', '.', 'X', '.', '.', '.'},
+                {'.', '.', '.', '.', '.', '.', '.', '.', '.', 'X', '.', '.', '.', '.', '.', '.'},
+                {'.', 'X', '.', '.', '.', 'X', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+                {'.', 'X', 'X', 'X', '.', '.', '.', 'X', '.', '.', 'X', 'X', 'X', '.', '.', '.'},
+                {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'X', '.', '.'},
+                {'X', '.', '.', 'X', '.', 'X', '.', '.', 'X', '.', '.', '.', '.', '.', '.', '.'},
+                {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+                {'.', '.', '.', 'X', 'X', '.', '.', '.', '.', '.', '.', '.', 'X', '.', '.', '.'},
+                {'.', '.', '.', '.', '.', '.', '.', 'X', '.', '.', 'X', '.', '.', '.', '.', '.'},
+                {'.', 'X', '.', '.', '.', 'X', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'}};
+            vaild = true;
+            break;
+
+        default:
+            cout << "Not a vaild option.\n";
+            break;
+        }
+
+        if (vaild)
+        {
+            int row = grid.size();
+            int col = grid[0].size();
+
+            char restart;
+            clock_t t;
+            auto start = chrono::steady_clock::now();
+            int result = soccer_exhaustive(grid, row, col);
+            auto end = chrono::steady_clock::now();
+            const chrono::duration<double> elapsed{end - start};
+
+            cout << "There are " << result << " possible pathways to get to the goal" << '\n';
+            cout << "It took " << chrono::duration_cast<chrono::seconds>(elapsed).count() << " seconds." << '\n';
+            cout << "Would you like to try another grid? (y/n) ";
+            cin >> restart;
+
+            while (restart != 'y' && restart != 'Y' && restart != 'n' && restart != 'N')
+            {
+                cout << "Invalid input\n";
+                cout << "Would you like to try another grid? (y/n) ";
+                cin >> restart;
+            }
+            if (restart == 'y' || restart == 'Y')
+            {
+                vaild = false;
+            }
+        }
+    }
     return 0;
 }
 

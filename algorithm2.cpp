@@ -54,7 +54,7 @@ int main() {
   const chrono::duration<double> elapsed{end - start};
 
   cout << "There are " << result << " possible pathways to get to the goal." << '\n';
-  cout << "It took " << elapsed << "." << '\n';
+  cout << "It took " << elapsed.count() << "." << '\n';
 
   return 0;
 }

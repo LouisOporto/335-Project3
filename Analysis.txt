@@ -1,7 +1,0 @@
-Louis Oporto, Florentino Becerra, Haron Taher, John Michael Lott
-CPSC 335-04, Spring 2024
-Project 3
-
-Algorithm 1 Analysis: Exhaustive Search
-
-Algorithm 2 Analysis: Dynamic Programming

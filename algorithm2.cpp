@@ -8,16 +8,19 @@
 #include <chrono>
 using namespace std;
 
+// Function prototype for the dynamic programming solution.
 int soccer_dyn_prog(const vector<vector<char>> &F);
 
 int main()
 {
-  vector<vector<char>> grid;
-  int choice = 0;
-  bool vaild = false;
-  while (!vaild)
-  {
+  vector<vector<char>> grid; // Grid to represent the soccer field.
+  int choice = 0;            // User choice for grid size.
+  bool valid = false;        // Validity check for user input.
 
+  // Loop until a valid grid choice is made.
+  while (!valid)
+  {
+    // Prompt user for grid size.
     cout << "\n1.2x2\n"
             "2.4x4\n"
             "3.8x8\n"
@@ -25,14 +28,16 @@ int main()
             "5.16x16\n"
             "Which size grid would you like to test? ";
 
-    cin >> choice;
+    cin >> choice; // Get user input.
+
+    // Create grid based on user choice.
     switch (choice)
     {
     case 1:
       grid = {
           {'.', '.'},
           {'X', '.'}};
-      vaild = true;
+      valid = true;
       break;
 
     case 2:
@@ -41,7 +46,7 @@ int main()
           {'X', '.', '.', 'X'},
           {'.', 'X', '.', '.'},
           {'.', '.', '.', '.'}};
-      vaild = true;
+      valid = true;
       break;
 
     case 3:
@@ -54,7 +59,7 @@ int main()
           {'.', '.', 'X', '.', '.', '.', '.', '.'},
           {'.', '.', '.', '.', 'X', '.', '.', '.'},
           {'.', '.', '.', '.', '.', '.', '.', '.'}};
-      vaild = true;
+      valid = true;
       break;
 
     case 4:
@@ -72,7 +77,7 @@ int main()
           {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
           {'X', '.', '.', 'X', '.', '.', '.', '.', 'X', '.', '.', '.'},
       };
-      vaild = true;
+      valid = true;
       break;
 
     case 5:
@@ -93,28 +98,29 @@ int main()
           {'.', '.', '.', 'X', 'X', '.', '.', '.', '.', '.', '.', '.', 'X', '.', '.', '.'},
           {'.', '.', '.', '.', '.', '.', '.', 'X', '.', '.', 'X', '.', '.', '.', '.', '.'},
           {'.', 'X', '.', '.', '.', 'X', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'}};
-      vaild = true;
+      valid = true;
       break;
 
     default:
-      cout << "Not a vaild option.\n";
+      cout << "Not a valid option.\n";
       break;
     }
 
-    if (vaild)
+    if (valid)
     {
-      char restart;
-      clock_t t;
-      auto start = chrono::steady_clock::now();
-      int result = soccer_dyn_prog(grid);
-      auto end = chrono::steady_clock::now();
-      const chrono::duration<double> elapsed{end - start};
+      char restart;                                   // User choice to restart or not.
+      auto start = chrono::steady_clock::now();       // Start timer.
+      int result = soccer_dyn_prog(grid);             // Compute number of pathways.
+      auto end = chrono::steady_clock::now();         // End timer.
+      chrono::duration<double> elapsed = end - start; // Calculate elapsed time.
 
+      // Display results.
       cout << "There are " << result << " possible pathways to get to the goal" << '\n';
       cout << "It took " << chrono::duration_cast<chrono::seconds>(elapsed).count() << " seconds." << '\n';
       cout << "Would you like to try another grid? (y/n) ";
       cin >> restart;
 
+      // Validate user choice to restart or exit.
       while (restart != 'y' && restart != 'Y' && restart != 'n' && restart != 'N')
       {
         cout << "Invalid input\n";
@@ -123,7 +129,7 @@ int main()
       }
       if (restart == 'y' || restart == 'Y')
       {
-        vaild = false;
+        valid = false; // Reset valid to false to continue the loop.
       }
     }
   }
@@ -133,41 +139,39 @@ int main()
 
 int soccer_dyn_prog(const vector<vector<char>> &F)
 {
-  int r = F.size();
-  int c = F[0].size();
-  vector<vector<int>> A(r, vector<int>(c, 0));
+  int r = F.size();                            // Number of rows.
+  int c = F[0].size();                         // Number of columns.
+  vector<vector<int>> A(r, vector<int>(c, 0)); // DP table.
 
-  // Corner case: initial cell is impassable
-  if (F[0][0] == 'X')
+  if (F[0][0] == 'X') // Initial cell is blocked.
   {
     return 0;
   }
 
-  // Base case
-  A[0][0] = 1;
+  A[0][0] = 1; // Start at the top-left corner.
 
-  // General cases
+  // Populate the DP table.
   for (int i = 0; i < r; ++i)
   {
     for (int j = 0; j < c; ++j)
     {
-      if (F[i][j] == 'X')
+      if (F[i][j] == 'X') // If the cell is blocked, skip it.
       {
         A[i][j] = 0;
         continue;
       }
 
-      if (i > 0 && F[i - 1][j] != 'X')
+      if (i > 0 && F[i - 1][j] != 'X') // Move down.
       {
         A[i][j] += A[i - 1][j];
       }
 
-      if (j > 0 && F[i][j - 1] != 'X')
+      if (j > 0 && F[i][j - 1] != 'X') // Move right.
       {
         A[i][j] += A[i][j - 1];
       }
     }
   }
 
-  return A[r - 1][c - 1];
+  return A[r - 1][c - 1]; // Return the value in the bottom-right corner.
 }

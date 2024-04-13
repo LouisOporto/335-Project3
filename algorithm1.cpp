@@ -14,13 +14,14 @@ bool isValidPath(string candidatePath, vector<vector<char>> &grid, int row, int 
 
 int main()
 {
-    // Grid declaration and definition
+    // Grid declaration and initialization
     vector<vector<char>> grid;
     int choice = 0;
-    bool vaild = false;
-    while (!vaild)
-    {
+    bool valid = false;
 
+    while (!valid)
+    {
+        // Display grid size options
         cout << "\n1.2x2\n"
                 "2.4x4\n"
                 "3.8x8\n"
@@ -28,14 +29,17 @@ int main()
                 "5.16x16\n"
                 "Which size grid would you like to test? ";
 
+        // Get user's choice
         cin >> choice;
+
+        // Assign the corresponding grid based on the user's choice
         switch (choice)
         {
         case 1:
             grid = {
                 {'.', '.'},
                 {'X', '.'}};
-            vaild = true;
+            valid = true;
             break;
 
         case 2:
@@ -44,7 +48,7 @@ int main()
                 {'X', '.', '.', 'X'},
                 {'.', 'X', '.', '.'},
                 {'.', '.', '.', '.'}};
-            vaild = true;
+            valid = true;
             break;
 
         case 3:
@@ -57,7 +61,7 @@ int main()
                 {'.', '.', 'X', '.', '.', '.', '.', '.'},
                 {'.', '.', '.', '.', 'X', '.', '.', '.'},
                 {'.', '.', '.', '.', '.', '.', '.', '.'}};
-            vaild = true;
+            valid = true;
             break;
 
         case 4:
@@ -75,7 +79,7 @@ int main()
                 {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
                 {'X', '.', '.', 'X', '.', '.', '.', '.', 'X', '.', '.', '.'},
             };
-            vaild = true;
+            valid = true;
             break;
 
         case 5:
@@ -96,31 +100,34 @@ int main()
                 {'.', '.', '.', 'X', 'X', '.', '.', '.', '.', '.', '.', '.', 'X', '.', '.', '.'},
                 {'.', '.', '.', '.', '.', '.', '.', 'X', '.', '.', 'X', '.', '.', '.', '.', '.'},
                 {'.', 'X', '.', '.', '.', 'X', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'}};
-            vaild = true;
+            valid = true;
             break;
 
         default:
-            cout << "Not a vaild option.\n";
+            // Handle invalid option
+            cout << "Not a valid option.\n";
             break;
         }
 
-        if (vaild)
+        // If a valid grid is selected
+        if (valid)
         {
             int row = grid.size();
             int col = grid[0].size();
 
             char restart;
-            clock_t t;
             auto start = chrono::steady_clock::now();
-            int result = soccer_exhaustive(grid, row, col);
+            int result = soccer_exhaustive(grid, row, col); // Assume soccer_exhaustive is a defined function
             auto end = chrono::steady_clock::now();
             const chrono::duration<double> elapsed{end - start};
 
+            // Output the result and time taken
             cout << "There are " << result << " possible pathways to get to the goal" << '\n';
             cout << "It took " << chrono::duration_cast<chrono::seconds>(elapsed).count() << " seconds." << '\n';
             cout << "Would you like to try another grid? (y/n) ";
             cin >> restart;
 
+            // Handle invalid input for restart
             while (restart != 'y' && restart != 'Y' && restart != 'n' && restart != 'N')
             {
                 cout << "Invalid input\n";
@@ -129,7 +136,7 @@ int main()
             }
             if (restart == 'y' || restart == 'Y')
             {
-                vaild = false;
+                valid = false; // Continue to allow another grid selection
             }
         }
     }
@@ -143,8 +150,6 @@ int soccer_exhaustive(vector<vector<char>> &grid, int row, int col)
     // Loop through all possible binary sequences (0 to 2^n - 1)
     for (int bits = 0; bits < (1 << n); bits++)
     {
-        // cout << bits << '\n';
-        // cout << bits << '\n';
         // Build the path based on the binary sequence
         string candidatePath = "";
         for (int k = 0; k < n; k++)
@@ -158,8 +163,6 @@ int soccer_exhaustive(vector<vector<char>> &grid, int row, int col)
                 candidatePath.push_back('0'); // 0 represents down
             }
         }
-        // cout << candidatePath << '\n';
-        // cout << candidatePath << '\n';
         // Check if the path is valid (within grid, avoids opponents, reaches goal)
         if (isValidPath(candidatePath, grid, row, col))
         {
@@ -177,8 +180,6 @@ bool isValidPath(string candidatePath, vector<vector<char>> &grid, int row, int 
     int n = candidatePath.length();
     int zeros = 0;
     int ones = 0;
-
-    // TODO add a base case if grid[0][0] == X and maybe if grid[r - 1][c - 1] == X
 
     // Go through the pathway given by the binary string ie(0001 = down, down, down, right)
     for (int i = 0; i < n; i++)

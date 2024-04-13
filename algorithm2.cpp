@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <vector>
+#include <chrono>
 using namespace std;
 
 int soccer_dyn_prog(const vector<vector<char>> &F);
@@ -22,7 +23,13 @@ int main()
     {'.', '.', '.', '.', '.', '.', '.', '.', '.'}
     };
 
-  cout << "Number of valid paths: " << soccer_dyn_prog(F_example) << endl;
+  auto start = chrono::steady_clock::now();
+  int result = soccer_dyn_prog(F_example);
+  auto end = chrono::steady_clock::now();
+  const chrono::duration<double> elapsed{end - start};
+
+  cout << "There are " << result << " possible pathways to get to the goal" << '\n';
+    cout << "It took " << chrono::duration_cast<chrono::seconds>(elapsed).count() << " seconds." << '\n';
 
   return 0;
 }
